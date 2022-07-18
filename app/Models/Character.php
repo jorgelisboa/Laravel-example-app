@@ -10,4 +10,5 @@ class Character extends Model
     use HasFactory;
 
     protected $table = 'character';
+    protected $fillable = ['name']; //Mass assignment
 }

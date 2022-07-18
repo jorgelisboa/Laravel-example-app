@@ -14,11 +14,12 @@ use App\Http\Controllers\CharactersController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return to_route('character.index');
 });
 
-Route::get('/character', [CharactersController::class, 'index']);
-
-Route::get('/character/create', [CharactersController::class, 'create']);
-
-Route::post('/character/save', [CharactersController::class, 'store']);
+//Ao criar um grupo de rotas, não é necessário dizer qual classe realiza a action chamada
+Route::controller(CharactersController::class)->group(function () {
+    Route::get('/character','index')->name('character.index');
+    Route::get('/character/create',  'create')->name('character.create');
+    Route::post('/character/save', 'store')->name('character.store');
+});

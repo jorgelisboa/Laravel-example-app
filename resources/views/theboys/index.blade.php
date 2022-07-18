@@ -1,7 +1,7 @@
 <x-layout title="Who are the boys">
 
     <h1>WHO ARE THE BOYS?</h1>
-    <a href="/character/create">Add a new character?</a>
+    <a href="{{ route('character.create') }}">Add a new character?</a>
 
     <ul>
         @foreach ($characters as $character)

@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Character;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-
 
 class CharactersController extends Controller
 {
@@ -22,12 +20,9 @@ class CharactersController extends Controller
     }
 
     public function store(Request $request) {
-        $characterName = $request->input('name');
-
+        // dd($request->all());
         // DB::insert('INSERT INTO character (name) VALUES (?)', [$characterName]); // pure SQL code
-        $character = new Character();
-        $character->name = $characterName;
-        $character->save();
+        Character::create($request->all()); //Passa os valores presentes no fillable da Classe Character
 
         return redirect('/character');
     }
