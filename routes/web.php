@@ -18,9 +18,12 @@ Route::get('/', function () {
 });
 
 //Ao criar um grupo de rotas, não é necessário dizer qual classe realiza a action chamada
-Route::controller(CharactersController::class)->group(function () {
+/*Route::controller(CharactersController::class)->group(function () {
     Route::get('/character','index')->name('character.index');
     Route::get('/character/create',  'create')->name('character.create');
     Route::post('/character/store', 'store')->name('character.store');
     Route::delete('/character/destroy/{character}', 'destroy')->name('character.destroy');
-});
+    Route::get('/character/{character}/edit', 'edit')->name('character.edit');
+});*/
+
+Route::resource('/character', CharactersController::class);

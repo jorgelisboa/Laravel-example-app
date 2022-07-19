@@ -15,6 +15,7 @@
             <form action=" {{ route('character.destroy', $character->id) }}" method="post">
                 @csrf
                 @method('DELETE')
+                <a href="{{ route('character.edit', $character->id) }}">Edit</a>
                 <button>
                     Delete
                 </button>

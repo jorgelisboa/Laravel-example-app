@@ -37,4 +37,9 @@ class CharactersController extends Controller
         //POST REDIRECT GET
         return to_route('character.index')->with('success.message', 'Character removed'); // with() does $request->session()->flash('success.message', 'Character removed');
     }
+
+    public function edit(Character $character)
+    {
+        return view('theboys.edit')->with('character', $character);
+    }
 }
