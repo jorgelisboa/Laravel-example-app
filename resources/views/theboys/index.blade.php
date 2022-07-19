@@ -3,6 +3,12 @@
     <h1>WHO ARE THE BOYS?</h1>
     <a href="/character/create">Add a new character?</a>
 
+    @isset($successMessage)
+    <div>
+        {{ $successMessage }}
+    </div>
+    @endisset
+
     <ul>
         @foreach ($characters as $character)
         <li>{{ $character->name }}

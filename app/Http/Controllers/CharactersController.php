@@ -7,12 +7,15 @@ use Illuminate\Http\Request;
 
 class CharactersController extends Controller
 {
-    public function index() {
+    public function index(Request $request) {
 
         //Eloquent returns a collection
         $characters = Character::query()->orderBy('name')->get(); //Ascendent as default
+        $successMessage = session('success.message');
 
-        return view('theboys.index')->with('characters', $characters);
+        return view('theboys.index')
+            ->with('characters', $characters)
+            ->with('successMessage', $successMessage);
     }
 
     public function create() {
@@ -22,16 +25,16 @@ class CharactersController extends Controller
     public function store(Request $request) {
         // dd($request->all());
         // DB::insert('INSERT INTO character (name) VALUES (?)', [$characterName]); // pure SQL code
-        Character::create($request->all()); //Passa os valores presentes no fillable da Classe Character
+        $character = Character::create($request->all()); //Passa os valores presentes no fillable da Classe Character
+        $request->session()->flash('success.message', "'{$character->name}' added to your list"); //Only for one request
 
-        to_route('character.index');
+        return to_route('character.index');
     }
 
     public function destroy(Request $request) {
         //dd($request->character); //Looking for parameter inside our request in our url (look at web.php)
         Character::destroy($request->character);
-
         //POST REDIRECT GET
-        return to_route('character.index');
+        return to_route('character.index')->with('success.message', 'Character removed'); // with() does $request->session()->flash('success.message', 'Character removed');
     }
 }
