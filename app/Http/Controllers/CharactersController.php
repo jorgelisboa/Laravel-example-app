@@ -42,4 +42,12 @@ class CharactersController extends Controller
     {
         return view('theboys.edit')->with('character', $character);
     }
+
+    public function update(Character $character, Request $request)
+    {
+        $character->fill($request->all()); //Mass assignment to fill all the fields inside fill()
+        $character->save();
+
+        return to_route('character.index')->with('success.message', "Character '$character->name' updated");
+    }
 }

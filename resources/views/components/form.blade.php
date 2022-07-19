@@ -1,6 +1,6 @@
 <form action=" {{ $action }} " method="post">
-
     @csrf
+
     @isset($name)
         @method('PUT')
         <h2>Edit your character</h2>
@@ -12,5 +12,6 @@
         id="name"
         name="name"
         @isset($name) value="{{ $name }}" @endisset>
+
     <button type="submit">Continue</button>
 </form>
