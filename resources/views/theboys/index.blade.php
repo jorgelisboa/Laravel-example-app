@@ -1,11 +1,19 @@
 <x-layout title="Who are the boys">
 
     <h1>WHO ARE THE BOYS?</h1>
-    <a href="{{ route('character.create') }}">Add a new character?</a>
+    <a href="/character/create">Add a new character?</a>
 
     <ul>
         @foreach ($characters as $character)
-        <li>{{ $character->name }}</li>
+        <li>{{ $character->name }}
+            <form action=" {{ route('character.destroy', $character->id) }}" method="post">
+                @csrf
+                @method('DELETE')
+                <button>
+                    Delete
+                </button>
+            </form>
+        </li>
         @endforeach
     </ul>
 

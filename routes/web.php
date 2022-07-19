@@ -21,5 +21,6 @@ Route::get('/', function () {
 Route::controller(CharactersController::class)->group(function () {
     Route::get('/character','index')->name('character.index');
     Route::get('/character/create',  'create')->name('character.create');
-    Route::post('/character/save', 'store')->name('character.store');
+    Route::post('/character/store', 'store')->name('character.store');
+    Route::delete('/character/destroy/{character}', 'destroy')->name('character.destroy');
 });

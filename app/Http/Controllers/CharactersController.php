@@ -24,6 +24,14 @@ class CharactersController extends Controller
         // DB::insert('INSERT INTO character (name) VALUES (?)', [$characterName]); // pure SQL code
         Character::create($request->all()); //Passa os valores presentes no fillable da Classe Character
 
-        return redirect('/character');
+        to_route('character.index');
+    }
+
+    public function destroy(Request $request) {
+        //dd($request->character); //Looking for parameter inside our request in our url (look at web.php)
+        Character::destroy($request->character);
+
+        //POST REDIRECT GET
+        return to_route('character.index');
     }
 }

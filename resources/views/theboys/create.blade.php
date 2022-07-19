@@ -1,7 +1,7 @@
 <x-layout title="New character">
 
     <h2>Add your character</h2>
-    <form action="/character/save" method="post">
+    <form action=" {{ route('character.store') }} " method="post">
         @csrf
         <label for="name">Character name:</label>
         <input type="text" id="name" name="name">
