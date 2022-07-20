@@ -14,7 +14,7 @@ use App\Http\Controllers\CharactersController;
 */
 
 Route::get('/', function () {
-    return to_route('character.index');
+    return to_route('characters.index');
 });
 
 //Ao criar um grupo de rotas, não é necessário dizer qual classe realiza a action chamada
@@ -26,4 +26,4 @@ Route::get('/', function () {
     Route::get('/character/{character}/edit', 'edit')->name('character.edit');
 });*/
 
-Route::resource('/character', CharactersController::class);
+Route::resource('/characters', CharactersController::class);

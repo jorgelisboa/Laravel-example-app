@@ -28,14 +28,14 @@ class CharactersController extends Controller
         $character = Character::create($request->all()); //Passa os valores presentes no fillable da Classe Character
         $request->session()->flash('success.message', "'{$character->name}' added to your list"); //Only for one request
 
-        return to_route('character.index');
+        return to_route('characters.index');
     }
 
     public function destroy(Request $request) {
         //dd($request->character); //Looking for parameter inside our request in our url (look at web.php)
         Character::destroy($request->character);
         //POST REDIRECT GET
-        return to_route('character.index')->with('success.message', 'Character removed'); // with() does $request->session()->flash('success.message', 'Character removed');
+        return to_route('characters.index')->with('success.message', 'Character removed'); // with() does $request->session()->flash('success.message', 'Character removed');
     }
 
     public function edit(Character $character)
@@ -48,6 +48,6 @@ class CharactersController extends Controller
         $character->fill($request->all()); //Mass assignment to fill all the fields inside fill()
         $character->save();
 
-        return to_route('character.index')->with('success.message', "Character '$character->name' updated");
+        return to_route('characters.index')->with('success.message', "Character '$character->name' updated");
     }
 }
