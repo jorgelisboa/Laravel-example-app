@@ -34,6 +34,6 @@ class CharacterController extends Controller
     {
         return Character::whereId($character)
             ->with('sheets')
-            ->get(); //If our table relationship was "hasMany" it would be an array of objects
+            ->first(); //If our table relationship was "hasMany" it would be an array of objects
     }
 }
