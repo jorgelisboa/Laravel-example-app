@@ -11,4 +11,9 @@ class Character extends Model
 
     protected $table = 'character';
     protected $fillable = ['name']; //Mass assignment
+
+    public function sheets()
+    {
+        return $this->hasOne(Sheet::class, 'sheet_id');
+    }
 }

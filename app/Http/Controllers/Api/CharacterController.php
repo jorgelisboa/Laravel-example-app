@@ -10,7 +10,7 @@ class CharacterController extends Controller
 {
     public function index()
     {
-        return Character::all();
+        return Character::with('sheets')->get();
     }
 
     public function update(Request $request)
@@ -20,13 +20,18 @@ class CharacterController extends Controller
 
     public function store(Request $request)
     {
+        $imagePath = $request->file()
+            ->store('characters_images', 'public');
+
+        dd($imagePath);
+
         return response()->json(
             Character::create($request->all()), 201
-        );
+        ); //You can specify that it's a json (laravel tries to parse, so, better prevent) and pass a http status after response
     }
 
-    public function show(Character $character)
+    public function show(Character $character) //See which endpoint is it using route:list
     {
-        return $character;
+        return $character->sheets; //If our table relationship was "hasMany" it would be an array of objects
     }
 }
