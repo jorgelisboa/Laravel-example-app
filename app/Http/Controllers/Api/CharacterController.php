@@ -13,17 +13,14 @@ class CharacterController extends Controller
         return Character::with('sheets')->get();
     }
 
-    public function update(Request $request)
-    {
-        dd($request);
-    }
-
     public function store(Request $request)
     {
-        $imagePath = $request->file()
+        /*
+         * $imagePath = $request->file()
             ->store('characters_images', 'public');
 
         dd($imagePath);
+        */
 
         return response()->json(
             Character::create($request->all()), 201
@@ -32,8 +29,26 @@ class CharacterController extends Controller
 
     public function show(int $character) // REMEMBER: See which endpoint is it using route:list
     {
+        if (Character::find($character) == null) {
+            return response()->json(['message' => 'Character not found'], 404);
+        }
+
         return Character::whereId($character)
             ->with('sheets')
             ->first(); //If our table relationship was "hasMany" it would be an array of objects
+    }
+
+    public function update(Character $character, Request $request)
+    {
+        $character->fill($request->all());
+        $character->save();
+
+        return $character;
+    }
+
+    public function destroy(int $character)
+    {
+        Character::destroy($character); //Delete this id line, instead of going to our db, finding it and delete
+        return response()->noContent();
     }
 }
