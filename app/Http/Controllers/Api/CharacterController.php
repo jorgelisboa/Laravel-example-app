@@ -30,8 +30,10 @@ class CharacterController extends Controller
         ); //You can specify that it's a json (laravel tries to parse, so, better prevent) and pass a http status after response
     }
 
-    public function show(Character $character) //See which endpoint is it using route:list
+    public function show(int $character) // REMEMBER: See which endpoint is it using route:list
     {
-        return $character->sheets; //If our table relationship was "hasMany" it would be an array of objects
+        return Character::whereId($character)
+            ->with('sheets')
+            ->get(); //If our table relationship was "hasMany" it would be an array of objects
     }
 }
