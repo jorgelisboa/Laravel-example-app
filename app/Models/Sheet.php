@@ -8,6 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Sheet extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'char_photo_path',
+        'strength',
+        'dexterity',
+        'constitution',
+        'wisdom',
+        'charisma',
+        'sheet_id'
+    ];
     public $timestamps = false;
 
     public function sheet()
