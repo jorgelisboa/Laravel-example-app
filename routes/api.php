@@ -27,23 +27,19 @@ Route::get('/characters/{character}/sheet', function (\App\Models\Character $cha
 });
 
 Route::patch('/sheets/{sheet}', function (Request $request, Sheet $sheet){
-
-    if ($request->image_path != null) {
-        $sheet->update(['char_photo_path' => $request->image_path]);
-    }
-    if ($request->strength) {
+    if ($request->strength != null) {
         $sheet->update(['strength' => $request->strength]);
     }
-    if ($request->dexterity) {
+    if ($request->dexterity != null) {
         $sheet->update(['dexterity' => $request->dexterity]);
     }
-    if ($request->constitution) {
+    if ($request->constitution != null) {
         $sheet->update(['constitution' => $request->constitution]);
     }
-    if ($request->wisdom) {
+    if ($request->wisdom != null) {
         $sheet->update(['wisdom' => $request->wisdom]);
     }
-    if ($request->charisma) {
+    if ($request->charisma != null) {
         $sheet->update(['charisma' => $request->charisma]);
     }
 

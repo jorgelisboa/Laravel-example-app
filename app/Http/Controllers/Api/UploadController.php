@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Character;
 use App\Models\Sheet;
 use Illuminate\Http\Request;
 
@@ -17,8 +18,8 @@ class UploadController extends Controller
                 $image->extension() == 'jpg' or
                 $image->extension() == 'png')
             {
-                $imageName = $image->getClientOriginalName();
-                $image->storeAs('character_images', "$imageName", "public");
+                $imageName = strtolower(Character::all($request->sheet_id));
+                $image->storeAs('character_images', $imageName, "public");
 
                 //Inserting path in our database
                 Sheet::create([
